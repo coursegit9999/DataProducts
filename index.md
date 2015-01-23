@@ -17,6 +17,10 @@ knit        : slidify::knit2slides
 2. How much savings does miles per gallon efficiency offer?
 3. What is the best vehicle value for me?
 4. How do several basic vehicle characteristics affect MPG?
+5. Not a direct vehicle to vehicle comparison
+6. Helps buyers assess what car is best for them!
+7. Gain general knowledge on which vehicle features impact MPG
+8. Try it Now! https://wlazorik.shinyapps.io/ShinyTest1/
 
 --- .class #id 
 
@@ -33,7 +37,7 @@ knit        : slidify::knit2slides
 
 1. Filter out older data from 1984 - 1999
 2. Narrow the features selected for model creation to year, vehicle type, cylinders, drive type, and transmission type.
-3. Combined City and Highway MPG estimates to obtain an Average MPG. Generated a linear model for estimating miles per gallon based on the above five features
+3. Combined City and Highway MPG estimates to obtain an Average MPG. Generated a linear model for estimating miles per gallon based on the above five features 
 4. Combined original factor levels for vehicle type (34), drive (8), and transmission (46) to create a smaller subset of options and make the final product more user friendly 
 5. Original Factor Example for Drive Type:
 
@@ -75,12 +79,6 @@ Multiple R-squared:  0.7234,    Adjusted R-squared:  0.7233
 F-statistic:  4195 on 11 and 17644 DF,  p-value: < 2.2e-16
 ```
 
---- .class #id 
 
-## MPG Comparison - Use It Today!
 
-1. Not a direct vehicle to vehicle comparison
-2. Helps buyers assess what car is best for them!
-3. Gain general knowledge on which vehicle features impact MPG
-4. What are your suggestions for new capabilities to add to this exciting data product?
-5. Try it Now! https://wlazorik.shinyapps.io/ShinyTest1/
+
