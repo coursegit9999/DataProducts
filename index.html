@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Products Project</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Data Products Project">
+  <meta name="author" content="William Lazorik">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Data Products Project</h1>
+    <h2>Miles Per Gallon Vehicle Comparison</h2>
+    <p>William Lazorik<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>MPG Comparison - Summary</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>This data product will help individuals understand how their vehicle selections and related fuel efficiency affect their overall costs.</li>
+<li>How much savings does miles per gallon efficiency offer?</li>
+<li>What is the best vehicle value for me?</li>
+<li>How do several basic vehicle characteristics affect MPG?</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>MPG Comparison - Dataset Overview</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Leverages the vehicles.csv file from FuelEconomy.gov</li>
+<li>Contains fuel economy data on vehicles from 1984-2016</li>
+<li>Only data from 2000-2016 leveraged to eliminate the influence of older vehicles</li>
+<li>Download link: <a href="http://www.fueleconomy.gov/feg/download.shtml">http://www.fueleconomy.gov/feg/download.shtml</a></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>MPG Comparison - Data Processing</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Filter out older data from 1984 - 1999</li>
+<li>Narrow the features selected for model creation to year, vehicle type, cylinders, drive type, and transmission type.</li>
+<li>Combined City and Highway MPG estimates to obtain an Average MPG. Generated a linear model for estimating miles per gallon based on the above five features</li>
+<li>Combined original factor levels for vehicle type (34), drive (8), and transmission (46) to create a smaller subset of options and make the final product more user friendly </li>
+<li>Original Factor Example for Drive Type:</li>
+</ol>
+
+<pre><code class="r">vehicles &lt;- read.csv(&quot;D:/R/RClass/DataProducts/ShinyTest1/vehicles.csv&quot;)
+unique(vehicles$drive)
+</code></pre>
+
+<pre><code>## [1] Rear-Wheel Drive           Front-Wheel Drive         
+## [3] 4-Wheel or All-Wheel Drive                           
+## [5] 2-Wheel Drive              All-Wheel Drive           
+## [7] 4-Wheel Drive              Part-time 4-Wheel Drive   
+## 8 Levels:  2-Wheel Drive 4-Wheel Drive ... Rear-Wheel Drive
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>MPG Comparison - Linear Model Results</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>Coefficients:       Estimate   Std. Error  t value   Pr(&gt;|t|) 
+(Intercept)         -7.811e+02  1.330e+01  -58.708   &lt;2e-16 ***
+Year                 4.100e-01  6.618e-03   61.947   &lt;2e-16 ***
+TypeMiniVan         -5.331e+00  2.206e-01  -24.165   &lt;2e-16 ***
+TypeSpecial Purpose -6.057e+00  5.181e-01  -11.691   &lt;2e-16 ***
+TypeSUV             -3.783e+00  7.689e-02  -49.195   &lt;2e-16 ***
+TypeTruck           -4.736e+00  1.028e-01  -46.080   &lt;2e-16 ***
+TypeVan             -6.221e+00  1.806e-01  -34.434   &lt;2e-16 ***
+TypeWagon           -1.291e+00  1.267e-01  -10.194   &lt;2e-16 ***
+Cylinders           -2.277e+00  2.011e-02 -113.194   &lt;2e-16 ***
+DriveFront           4.037e+00  8.556e-02   47.181   &lt;2e-16 ***
+DriveRear            7.491e-01  7.720e-02    9.703   &lt;2e-16 ***
+TransmissionManual  -1.719e-01  7.151e-02   -2.404   0.0162 *  
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Residual standard error: 3.889 on 17644 degrees of freedom
+  (65 observations deleted due to missingness)
+Multiple R-squared:  0.7234,    Adjusted R-squared:  0.7233 
+F-statistic:  4195 on 11 and 17644 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>MPG Comparison - Use It Today!</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Not a direct vehicle to vehicle comparison</li>
+<li>Helps buyers assess what car is best for them!</li>
+<li>Gain general knowledge on which vehicle features impact MPG</li>
+<li>What are your suggestions for new capabilities to add to this exciting data product?</li>
+<li>Try it Now! <a href="https://wlazorik.shinyapps.io/ShinyTest1/">https://wlazorik.shinyapps.io/ShinyTest1/</a></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='MPG Comparison - Summary'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='MPG Comparison - Dataset Overview'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='MPG Comparison - Data Processing'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='MPG Comparison - Linear Model Results'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='MPG Comparison - Use It Today!'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
